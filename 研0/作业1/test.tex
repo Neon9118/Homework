@@ -1,0 +1,192 @@
+#1.1.2示例
+\documentclass{article}
+\usepackage{ctex}          % 中文支持
+\usepackage{amsmath}       % 数学增强
+\usepackage{graphicx}      % 插图支持
+\usepackage{geometry}      %页面设置
+
+\begin{document}
+hello latex
+\end{document}
+
+#1.2-2 单行公式带编号
+\documentclass{ctexart}
+\begin{document}
+\begin{equation}
+    \alpha^2+\beta^2=\gamma^2
+\end{equation}
+\end{document}
+
+
+#1.2-3 自动引用
+\documentclass{ctexart}
+\usepackage{amsmath}
+
+\begin{document}
+
+这是一个经典的勾股定理公式：
+\begin{equation}
+    \alpha^2 + \beta^2 = \gamma^2 \label{eq:gougu}
+\end{equation}
+
+根据公式~\eqref{eq:gougu}，我们可以推导出斜边长度。
+
+\end{document}
+
+
+#1.2-4 多行公式
+\documentclass{ctexart}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{align 环境（每行独立编号）}
+\begin{align}
+    f(x) &= (x+1)^2 \nonumber \\
+         &= x^2 + 2x + 1 \label{eq:expand} \\
+    g(x) &= x^3 - 2x^2 + x \label{eq:gx}
+\end{align}
+其中公式~\eqref{eq:expand}是展开结果，公式~\eqref{eq:gx}是另一个函数。
+
+\section{aligned 环境（整体一个编号）}
+\begin{equation}
+    \begin{aligned}
+        S &= \sum_{i=1}^{n} a_i \\
+          &= a_1 + a_2 + \cdots + a_n \\
+          &= \frac{n(a_1 + a_n)}{2}
+    \end{aligned}
+    \label{eq:sum}
+\end{equation}
+
+\section{cases 环境（分段函数）}
+\begin{equation}
+    |x| = 
+    \begin{cases}
+        x,  & x \geq 0 \\
+        -x, & x < 0
+    \end{cases}
+    \label{eq:abs}
+\end{equation}
+
+\section{split 环境（长公式换行对齐）}
+\begin{equation}
+    \begin{split}
+        H(X) &= -\sum_{i=1}^{n} p(x_i) \log_2 p(x_i) \\
+             &= -\left( \frac{1}{2}\log_2\frac{1}{2} + \frac{1}{4}\log_2\frac{1}{4} + \frac{1}{4}\log_2\frac{1}{4} \right) \\
+             &= 1.5 \text{ bit}
+    \end{split}
+    \label{eq:entropy}
+\end{equation}
+
+\end{document}
+
+
+#1.3tex 文件中的图片
+\documentclass{ctexart}
+\usepackage{graphicx}
+
+\begin{document}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.6\textwidth]{firstlinux.png}
+\caption{1.1 本科课程截图}
+\end{figure}
+
+\end{document}
+
+#1.4 tex文件中的表格
+\documentclass{ctexart}
+
+\begin{document}
+
+\begin{table}[htbp]
+\centering
+\caption{LaTeX 常用文档结构命令}
+\begin{tabular}{ll}
+\hline
+\textbf{名称} & \textbf{对应} \\
+\hline
+章     & \verb|\chapter{...}| \\
+节     & \verb|\section{...}| \\
+小节   & \verb|\subsection{...}| \\
+小小节 & \verb|\subsubsection{...}| \\
+换行   & \verb|\\| 或 \verb|\newline| \\
+分段   & \verb|\par| \\
+分页   & \verb|\newpage| \\
+首行缩进 & \verb|\setlength{\parindent}{长度}| \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{document}
+
+#1.5-1 tex文件中直接引用文献
+\documentclass{ctexart}
+
+\begin{document}
+
+深度学习在自然语言处理领域取得了显著进展\cite{vaswani2017attention}。
+Transformer 架构提出的自注意力机制\cite{vaswani2017attention}，
+后来被 BERT\cite{devlin2019bert} 和 GPT 系列\cite{brown2020gpt} 进一步发展。
+推荐系统中的协同过滤方法也受到广泛关注\cite{he2017nCF}。
+
+\bibliographystyle{plain}
+\begin{thebibliography}{99}
+
+\bibitem{vaswani2017attention}
+Vaswani A, Shazeer N, Parmar N, et al.
+Attention is all you need\textnormal{[C]}.
+Advances in Neural Information Processing Systems, 2017: 5998-6008.
+
+\bibitem{devlin2019bert}
+Devlin J, Chang M W, Lee K, et al.
+BERT: Pre-training of deep bidirectional transformers for language understanding\textnormal{[C]}.
+NAACL-HLT, 2019: 4171-4186.
+
+\bibitem{brown2020gpt}
+Brown T B, Mann B, Ryder N, et al.
+Language models are few-shot learners\textnormal{[C]}.
+NeurIPS, 2020.
+
+\bibitem{he2017nCF}
+He X, Liao L, Zhang H, et al.
+Neural collaborative filtering\textnormal{[C]}.
+WWW, 2017: 173-182.
+
+\end{thebibliography}
+
+\end{document}
+
+#1.5-2 tex文件中使用BiBTex管理文献
+\documentclass{ctexart}
+
+\begin{document}
+
+复杂网络是研究大规模复杂系统拓扑结构与动力学行为的重要工具\cite{周涛2005复杂网络研究概述}。
+其中，链路预测问题旨在根据已知的网络结构信息预测缺失或未来可能出现的连边\cite{吕琳媛2010复杂网络链路预测}，
+而社区检测作为复杂网络分析的核心任务之一，旨在发现网络中具有紧密连接的节点组\cite{杨博2009复杂网络聚类方法}。
+近年来，这些研究方向在推荐系统\cite{吕琳媛2010复杂网络链路预测}、
+社交网络分析\cite{杨博2009复杂网络聚类方法}等领域得到了广泛应用。
+
+\bibliographystyle{plain}
+\bibliography{test}
+
+\end{document}
+
+#1.5-3 文献右上角引用
+\documentclass{ctexart}
+\usepackage[super,square,comma]{natbib}
+
+\begin{document}
+
+复杂网络是研究大规模复杂系统拓扑结构与动力学行为的重要工具\cite{周涛2005复杂网络研究概述}。
+其中，链路预测问题旨在根据已知的网络结构信息预测缺失或未来可能出现的连边\cite{吕琳媛2010复杂网络链路预测}，
+而社区检测作为复杂网络分析的核心任务之一，旨在发现网络中具有紧密连接的节点组\cite{杨博2009复杂网络聚类方法}。
+近年来，这些研究方向在推荐系统\cite{吕琳媛2010复杂网络链路预测}、
+社交网络分析\cite{杨博2009复杂网络聚类方法}等领域得到了广泛应用。
+
+\bibliographystyle{gbt7714}
+\bibliography{test}
+
+\end{document}
