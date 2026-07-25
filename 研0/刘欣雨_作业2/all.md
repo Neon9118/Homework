@@ -38,9 +38,17 @@
     - [3.7 写作能力](#37-写作能力)
     - [3.8 算法分析能力](#38-算法分析能力)
 - [第二部分：Git和GitHub](#第二部分git和github)
-  - [一、Git基本操作](#一git基本操作)
-    - [1.1 初始化仓库](#11-初始化仓库)
-    - [1.2 commit](#12-commit)
+  - [一、Repository](#一repository)
+    - [1.1 工作区](#11-工作区)
+    - [1.2 暂存区](#12-暂存区)
+    - [1.3 本地仓库](#13-本地仓库)
+  - [二、Commit](#二commit)
+  - [三、Branch](#三branch)
+    - [3.1 Creat](#31-creat)
+    - [3.2 Merge](#32-merge)
+  - [四、Remote](#四remote)
+    - [4.1 代理](#41-代理)
+    - [4.2 用SSH代替HTTPS](#42-用ssh代替https)
 - [第三部分：虚拟系统](#第三部分虚拟系统)
   - [一、Ubuntu](#一ubuntu)
   - [二、工具层](#二工具层)
@@ -313,16 +321,92 @@ python 虚拟环境 git版本控制 Linux pytorch
 
 ---
 
-## 一、Git基本操作
 
-### 1.1 初始化仓库
+## 一、Repository
 
 ![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/gitcreat.png)
 *初始化仓库*
 
-### 1.2 commit
+### 1.1 工作区
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/gongzuo.png)
+
+>U=Untracked未追踪，说明文件改了但还没管它
+
+<br/>
+
+### 1.2 暂存区
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/zancun.png)
+<br/>
+
+### 1.3 本地仓库
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/bendicangku.png)
+
+>蓝色是指文件已经存到本地仓库中，紫色是指已经push到远程仓库
+
+<br/>
 
 
+## 二、Commit
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/gitcommit.png)
+>在提交时要简单描述，提交的标题不能是空
+
+每次提交后会生成唯一的commit ID。可以通过`git log`命令获取
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/gitlog.png)
+
+<br/>
+
+## 三、Branch
+
+### 3.1 Creat
+因为模块的不确定性，担心加入后程序出错，可以创建新分支。待调试稳定后，合并分支加入程序。
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/gitbranch.png)
+
+### 3.2 Merge
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/gitmerge.png)
+
+---
+
+## 四、Remote
+>使用GitHub实现
+
+### 4.1 代理
+一开始我并没有设置ssh，而是用Microsoft Store 中的Watttoolkit 设置的代理，但一直push失败
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/ssh1.png)
+
+### 4.2 用SSH代替HTTPS
+
+SSH（Secure Shell） = 安全远程连接协议
+>用密钥代替密码，安全地连远程服务器。
+
+- **生成ssh公钥**
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/remote1.png)
+
+<br/>
+
+- **在GitHub里添加New SSH Key**
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/remote2.png)
+
+<br/>
+
+- **回VS Code 终端测试**
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/remote3.png)
+
+<br/>
+
+- **push到远程仓库**
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/remote4.png)
+
+>SSH走22端口，这样就可以不经过代理，直接连GitHub
+>以后日常操作就三步：`git add .`,`git commit -m "说明"`,`git push`
+>全程不需要代理。
 
 ---
 
