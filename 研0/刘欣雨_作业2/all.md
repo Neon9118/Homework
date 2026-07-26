@@ -91,23 +91,23 @@
     - [3.1 核心论点](#31-核心论点)
     - [3.2 各类模型的本质拆解](#32-各类模型的本质拆解)
     - [3.3 总结](#33-总结)
-- [第五部分：AI模型方法体系——统计学习、机器学习与深度学习](#第五部分ai模型方法体系统计学习机器学习与深度学习)
-  - [一、统计学习](#一统计学习)
+- [第五部分：AI模型方法体系——机器学习与深度学习](#第五部分ai模型方法体系机器学习与深度学习)
+  - [一、机器学习](#一机器学习)
     - [1.1 安装Anaconda和Pycharm](#11-安装anaconda和pycharm)
-    - [1.2 sklearn](#12-sklearn)
+    - [1.2 学会使用sklearn](#12-学会使用sklearn)
           - [*示例：*](#示例-13)
           - [*示例：*](#示例-14)
     - [1.3 线性回归](#13-线性回归)
-    - [1.4](#14)
+    - [1.4 逻辑回归](#14-逻辑回归)
     - [1.5 KNN](#15-knn)
     - [1.6 决策树](#16-决策树)
     - [1.7 支持向量机](#17-支持向量机)
-  - [二、机器学习](#二机器学习)
-  - [三、深度学习](#三深度学习)
+  - [二、深度学习](#二深度学习)
 - [第六部分：python下怎么使用numpy和scipy](#第六部分python下怎么使用numpy和scipy)
 - [第七部分：画图](#第七部分画图)
   - [一、matplotlib](#一matplotlib)
   - [二、matlab](#二matlab)
+  - [三、Graphviz](#三graphviz)
   
 ---
 
@@ -1039,14 +1039,14 @@ Ubuntu里自带Python3
 
 ---
 ---
-# 第五部分：AI模型方法体系——统计学习、机器学习与深度学习
+# 第五部分：AI模型方法体系——机器学习与深度学习
 
 
->统计学习是地基-理论，机器学习是框架-方法，深度学习是顶层-工程突破。
+>机器学习是框架-方法，深度学习是顶层-工程突破。
 
-## 一、统计学习
+## 一、机器学习
 
->以下示例均源于本科学习课程《实验指南》
+>由于本科学习过《机器学习原理及应用》这一课程，特将课程实验与这次学习报告整合到一个文件夹中，以便之后复习使用，此章主要以介绍机器学习案例为主
 
 ### 1.1 安装Anaconda和Pycharm
 
@@ -1064,7 +1064,7 @@ Ubuntu里自带Python3
 
 ![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/jupyternotebook.png)
 
-### 1.2 sklearn
+### 1.2 学会使用sklearn
 
 - **sklearn机器学习包的基本使用；**
 
@@ -1245,7 +1245,7 @@ plt.show()
 
 <br/>
 
-### 1.4
+### 1.4 逻辑回归
 
 - **概念和原理**
 概念：逻辑回归虽名为“回归”，实则是广义线性模型下的二分类算法。它通过 Sigmoid函数:$$\sigma(x) = \frac{1}{1 + e^{-x}}$$将线性回归的输出 $z = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_k X_k$压缩到 (0,1) 区间，代表属于某一类别的概率。
@@ -1352,7 +1352,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
 # ========== 1. 加载数据 ==========
-train_df = pd.read_csv("F:/tjxx/train.csv")
+train_df = pd.read_csv("D:/JupyterNotebook/titanictrain.csv")
 train_df.info()
 
 # ========== 2. 数据预处理 ==========
@@ -1417,16 +1417,165 @@ print(f"泰坦尼克号生存预测准确率: {accuracy:.4f}")
 <br/>
 
 - **实践1**
+  基于k近邻有监督学习实现鸢尾花分类，对sklearn自带的数据集iris鸢尾花进行分类预测选取花萼的长度和花瓣的长度作为训练集,拆分数据集为训练集和测试集，其中测试集占20%；建立KNN模型，k=3；对测试集进行预测；打印准确率accuracy_score分数，再设置k=5，对测试集进行预测，打印准确率accuracy_score分数
+
+
+```python
+import pandas as pd
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+# (1) 加载iris数据集
+iris = load_iris()
+
+# (2) 使用pandas查看数据集信息
+iris_df = pd.DataFrame(iris.data, columns=iris.feature_names)
+iris_df['target'] = iris.target
+iris_df['target_name'] = iris_df['target'].map(
+    {0: 'setosa', 1: 'versicolor', 2: 'virginica'})
+print("===== 鸢尾花数据集信息 =====")
+print(iris_df.info())
+print("\n前5行：")
+print(iris_df.head())
+
+# (3) 选取花萼长度(sepal length)和花瓣长度(petal length)作为特征
+# sepal length = 第0列, petal length = 第2列
+X = iris.data[:, [0, 2]]  # 取第0列和第2列
+y = iris.target
+print(f"\n选取的特征：花萼长度 + 花瓣长度")
+print(f"特征形状: {X.shape}")
+
+# (4) 拆分数据集，测试集占20%
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42)
+print(f"训练集大小: {X_train.shape[0]}, 测试集大小: {X_test.shape[0]}")
+
+# (5) 建立KNN模型，k=3
+knn_3 = KNeighborsClassifier(n_neighbors=3)
+
+# (6) 对测试集进行预测
+knn_3.fit(X_train, y_train)
+y_pred_3 = knn_3.predict(X_test)
+
+# (7) 打印准确率
+acc_3 = accuracy_score(y_test, y_pred_3)
+print(f"\nk=3 时准确率: {acc_3:.4f}")
+
+# (8) 再设置k=5，预测并打印准确率
+knn_5 = KNeighborsClassifier(n_neighbors=5)
+knn_5.fit(X_train, y_train)
+y_pred_5 = knn_5.predict(X_test)
+acc_5 = accuracy_score(y_test, y_pred_5)
+print(f"k=5 时准确率: {acc_5:.4f}")
+
+```
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj16.png)
 
 
 <br/>
 
 - **实践2**
+  基于k近邻无监督学习找出鸢尾花数据聚集中的异常花朵，对sklearn自带的数据集iris鸢尾花进行异常花朵检测，选取花萼的长度和宽度作为训练集,使用matplotlib.pyplot方法画出数据集散点图,建立无监督最近邻模型（k=3）,对训练集进行fit拟合训练,使用模型的kneighbors方法得出每个点和其他3个点的距离distances,以及三个点的索引indexes，查看每个点的距离均值；使用matplotlib.pyplot 画图观测每个点的k 距离平均值；选择 >0.15 作为作为异常点，获得异常点的索引和其值;使用matplotlib.pyplot 再次画出数据集散点图，异常值设为红色点。
 
 
-<br/>
+```python
 
-- **实践3**
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.neighbors import NearestNeighbors
+
+# 设置中文显示（防止中文标题乱码）
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+
+# (1) 加载iris数据集
+iris = load_iris()
+
+# (2) 使用pandas查看数据集信息
+iris_df = pd.DataFrame(iris.data, columns=iris.feature_names)
+iris_df['target'] = iris.target
+print("===== 鸢尾花数据集信息 =====")
+print(iris_df.info())
+print("\n前5行：")
+print(iris_df.head())
+
+# (3) 选取花萼长度(sepal length)和花萼宽度(sepal width)作为训练集
+# sepal length = 第0列, sepal width = 第1列
+X = iris.data[:, [0, 1]]
+print(f"\n选取的特征：花萼长度 + 花萼宽度")
+print(f"特征形状: {X.shape}")
+
+# (4) 画出数据集散点图
+plt.figure(figsize=(8, 5))
+plt.scatter(X[:, 0], X[:, 1], c=iris.target, cmap='viridis', s=50, edgecolors='k')
+plt.xlabel('Sepal Length (cm)')
+plt.ylabel('Sepal Width (cm)')
+plt.title('Iris数据集散点图（花萼长度 vs 花萼宽度）')
+plt.colorbar(label='类别')
+plt.show()
+
+# (5) 使用NearestNeighbors建立无监督最近邻模型（k=3）
+nn = NearestNeighbors(n_neighbors=3)
+
+# (6) 对训练集进行fit拟合
+nn.fit(X)
+
+# (7) kneighbors方法得出每个点和其他3个点的距离和索引
+distances, indexes = nn.kneighbors(X)
+print(f"\n距离数组形状: {distances.shape}")
+print(f"索引数组形状: {indexes.shape}")
+print(f"前5个点的距离:\n{distances[:5]}")
+print(f"前5个点的邻居索引:\n{indexes[:5]}")
+
+# (8) 查看每个点的距离均值
+# 注意：第0列是自身到自身的距离(=0)，取后k个邻居的均值
+# distances第0列是0（自己到自己），所以取第1列到末列求均值
+mean_distances = distances[:, 1:].mean(axis=1)
+print(f"\n每个点的k距离均值（前10个）：")
+print(mean_distances[:10])
+
+# (9) 画图观测每个点的k距离平均值
+plt.figure(figsize=(10, 4))
+plt.bar(range(len(mean_distances)), mean_distances, color='steelblue')
+plt.axhline(y=0.15, color='red', linestyle='--', label='阈值=0.15')
+plt.xlabel('样本索引')
+plt.ylabel('k距离平均值')
+plt.title('每个点的k距离平均值')
+plt.legend()
+plt.show()
+
+# (10) 选择 > 0.15 作为异常点，获得异常点的索引和值
+anomaly_mask = mean_distances > 0.15
+anomaly_indices = np.where(anomaly_mask)[0]
+anomaly_values = X[anomaly_indices]
+print(f"\n异常点数量: {len(anomaly_indices)}")
+print(f"异常点索引: {anomaly_indices}")
+print(f"异常点值:\n{anomaly_values}")
+
+# (11) 再次画出散点图，异常值为红色点
+plt.figure(figsize=(8, 5))
+# 正常点
+normal_mask = ~anomaly_mask
+plt.scatter(X[normal_mask, 0], X[normal_mask, 1],
+            c=iris.target[normal_mask], cmap='viridis',
+            s=50, edgecolors='k', label='正常点')
+# 异常点（红色）
+plt.scatter(anomaly_values[:, 0], anomaly_values[:, 1],
+            c='red', s=100, edgecolors='k', marker='x',
+            label=f'异常点({len(anomaly_indices)}个)')
+plt.xlabel('Sepal Length (cm)')
+plt.ylabel('Sepal Width (cm)')
+plt.title('鸢尾花异常检测结果（红色×为异常点）')
+plt.legend()
+plt.show()
+
+```
+
 
 
 <br/>
@@ -1446,7 +1595,8 @@ print(f"泰坦尼克号生存预测准确率: {accuracy:.4f}")
 <br/>
 
 - **实践1** 
-  基于决策树ID3算法实现鸢尾花分类，对sklearn自带的数据集iris鸢尾花进行分类预测
+  基于决策树ID3算法实现鸢尾花分类，对sklearn自带的数据集iris鸢尾花进行分类预测，打印准确率accuracy_score分数，使用graphviz绘制决策树图形，决策树结点使用iris特征名称，生成id3_iris.pdf文件。
+
 
 ```python
 
@@ -1499,6 +1649,10 @@ graph.render('id3_iris', cleanup=True)
 print("决策树图形已生成: id3_iris.pdf")
 
 ```
+
+
+
+
 ![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj9.png)
 
 <br/>
@@ -1508,12 +1662,160 @@ print("决策树图形已生成: id3_iris.pdf")
 <br/>
 
 - **实践2**
-基于决策树算法实现葡萄酒分类，对sklearn自带的数据集wine进行分类预测
+基于决策树算法实现葡萄酒分类，对sklearn自带的数据集wine进行分类预测，打印准确率accuracy_score分数，使用graphviz绘制决策树图形，决策树结点使用wine特征名称，生成cart_wine.pdf文件。
+
+```python
+
+import pandas as pd
+from sklearn.datasets import load_wine
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, export_graphviz
+from sklearn.metrics import accuracy_score
+import graphviz
+
+# (1) 加载wine数据集
+wine = load_wine()
+
+# (2) 使用pandas查看数据集信息
+wine_df = pd.DataFrame(wine.data, columns=wine.feature_names)
+wine_df['target'] = wine.target
+wine_df['target_name'] = wine_df['target'].map({0: 'class_0', 1: 'class_1', 2: 'class_2'})
+print("===== 葡萄酒数据集信息 =====")
+print(wine_df.info())
+print("\n前5行：")
+print(wine_df.head())
+
+# (3) 拆分数据集，测试集占20%
+X_train, X_test, y_train, y_test = train_test_split(
+    wine.data, wine.target, test_size=0.2, random_state=42
+)
+print(f"\n训练集大小: {X_train.shape[0]}, 测试集大小: {X_test.shape[0]}")
+
+# (4) 基于CART算法建立决策树（criterion='gini'即CART）
+clf_cart = DecisionTreeClassifier(criterion='gini', random_state=42)
+clf_cart.fit(X_train, y_train)
+
+# (5) 对测试集进行预测
+y_pred = clf_cart.predict(X_test)
+
+# (6) 打印准确率
+acc = accuracy_score(y_test, y_pred)
+print(f"\nCART决策树准确率: {acc:.4f}")
+
+# (7) 使用graphviz绘制决策树，生成cart_wine.pdf
+dot_data = export_graphviz(
+    clf_cart,
+    feature_names=wine.feature_names,
+    class_names=wine.target_names,
+    filled=True,
+    rounded=True
+)
+graph = graphviz.Source(dot_data)
+graph.render('cart_wine', cleanup=True)
+print("决策树图形已生成: cart_wine.pdf")
+
+```
+<br/>
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj11.png)
 
 <br/>
 
-- **实践3**
-基于决策树实现泰坦尼克生存预测
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj12.png)
+
+<br/>
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj13.png)
+
+<br/>
+
+- **实践3**(拓展)
+基于决策树实现泰坦尼克生存预测，打印测试集的预测结果，打印准确率accuracy_score分数，使用graphviz绘制决策树图形，决策树结点使用字段特征名称，生成titanic.pdf文件。
+
+```python
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, export_graphviz
+from sklearn.metrics import accuracy_score
+import graphviz
+
+# (1) 读取train.csv，查看数据集信息
+train_df = pd.read_csv("D:/JupyterNotebook/train.csv")
+print("===== 泰坦尼克数据集信息 =====")
+print(f"数据形状: {train_df.shape}")
+print(train_df.head())
+
+# (2) 使用info()查看缺失数据
+print("\n===== 缺失数据情况 =====")
+print(train_df.info())
+print("\n各列缺失数量：")
+print(train_df.isnull().sum())
+
+# (3) 数据清洗与缺失值填充
+# 删除对预测无用的列：PassengerId, Name, Ticket, Cabin（Cabin缺失太多）
+train_df = train_df.drop(['PassengerId', 'Name', 'Ticket', 'Cabin'], axis=1)
+
+# 填充Age缺失值（用中位数）
+train_df['Age'] = train_df['Age'].fillna(train_df['Age'].median())
+
+# 填充Embarked缺失值（用众数）
+train_df['Embarked'] = train_df['Embarked'].fillna(train_df['Embarked'].mode()[0])
+
+# 填充Fare缺失值（如果有）
+train_df['Fare'] = train_df['Fare'].fillna(train_df['Fare'].median())
+
+# 将Sex转为数值：male=0, female=1
+train_df['Sex'] = train_df['Sex'].map({'male': 0, 'female': 1})
+
+# 将Embarked转为数值：S=0, C=1, Q=2
+train_df['Embarked'] = train_df['Embarked'].map({'S': 0, 'C': 1, 'Q': 2})
+
+print("\n清洗后数据：")
+print(train_df.head())
+print(train_df.info())
+
+# (4) 拆分训练集和测试集
+X = train_df.drop('Survived', axis=1)
+y = train_df['Survived']
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+print(f"\n训练集大小: {X_train.shape[0]}, 测试集大小: {X_test.shape[0]}")
+
+# (5) 建立决策树模型
+clf_titanic = DecisionTreeClassifier(criterion='entropy', max_depth=5, random_state=42)
+clf_titanic.fit(X_train, y_train)
+
+# (6) 对测试数据进行预测，打印预测结果
+y_pred = clf_titanic.predict(X_test)
+print("\n前20个预测结果：")
+print(y_pred[:20])
+
+# (7) 打印准确率
+acc = accuracy_score(y_test, y_pred)
+print(f"\n泰坦尼克决策树准确率: {acc:.4f}")
+
+# (8) 使用graphviz绘制决策树，生成titanic.pdf
+feature_names = X.columns.tolist()
+dot_data = export_graphviz(
+    clf_titanic,
+    feature_names=feature_names,
+    class_names=['Not Survived', 'Survived'],
+    filled=True,
+    rounded=True
+)
+graph = graphviz.Source(dot_data)
+graph.render('titanic', cleanup=True)
+print("决策树图形已生成: titanic.pdf")
+
+```
+<br/>
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj14.png)
+
+<br/>
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj15.png)
 
 <br/>
 
@@ -1526,22 +1828,39 @@ print("决策树图形已生成: id3_iris.pdf")
 - **实践1**
 
 
+```python
+
+
+```
+
 <br/>
 
 - **实践2**
 
+```python
+
+
+```
+
 
 <br/>
 
-- **实践3**
+- **实践3**(拓展)
+
+```python
+
+
+```
+
+
+
 
 ---
 
-## 二、机器学习
 
----
+## 二、深度学习
 
-## 三、深度学习
+
 
 ---
 
@@ -1558,3 +1877,7 @@ print("决策树图形已生成: id3_iris.pdf")
 ---
 
 ## 二、matlab
+
+---
+
+## 三、Graphviz
