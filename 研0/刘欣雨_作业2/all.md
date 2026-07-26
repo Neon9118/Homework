@@ -91,7 +91,19 @@
     - [3.1 核心论点](#31-核心论点)
     - [3.2 各类模型的本质拆解](#32-各类模型的本质拆解)
     - [3.3 总结](#33-总结)
-- [第五部分：机器学习](#第五部分机器学习)
+- [第五部分：AI模型方法体系——统计学习、机器学习与深度学习](#第五部分ai模型方法体系统计学习机器学习与深度学习)
+  - [一、统计学习](#一统计学习)
+    - [1.1 安装Anaconda和Pycharm](#11-安装anaconda和pycharm)
+    - [1.2 sklearn](#12-sklearn)
+          - [*示例：*](#示例-13)
+          - [*示例：*](#示例-14)
+    - [1.3 线性回归](#13-线性回归)
+    - [1.4](#14)
+    - [1.5 KNN](#15-knn)
+    - [1.6 决策树](#16-决策树)
+    - [1.7 支持向量机](#17-支持向量机)
+  - [二、机器学习](#二机器学习)
+  - [三、深度学习](#三深度学习)
 - [第六部分：python下怎么使用numpy和scipy](#第六部分python下怎么使用numpy和scipy)
 - [第七部分：画图](#第七部分画图)
   - [一、matplotlib](#一matplotlib)
@@ -1027,7 +1039,509 @@ Ubuntu里自带Python3
 
 ---
 ---
-# 第五部分：机器学习
+# 第五部分：AI模型方法体系——统计学习、机器学习与深度学习
+
+
+>统计学习是地基-理论，机器学习是框架-方法，深度学习是顶层-工程突破。
+
+## 一、统计学习
+
+>以下示例均源于本科学习课程《实验指南》
+
+### 1.1 安装Anaconda和Pycharm
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/Anaconda.png)
+
+<br/>
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/Anaconda2.png)
+
+<br/>
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/Pycharm.png)
+
+<br/>
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/jupyternotebook.png)
+
+### 1.2 sklearn
+
+- **sklearn机器学习包的基本使用；**
+
+
+```python
+
+from sklearn.datasets import load_iris
+
+iris = load_iris()
+
+x = iris.data
+
+y = iris.target
+
+import pandas as pd
+
+data_df = pd.DataFrame(iris.data, columns=iris.feature_names)
+
+data_df
+
+```
+
+###### *示例：*
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tongji1.png)
+
+<br/>
+
+- 学会sklearn加载数据集；
+
+```python
+#import引入乳腺癌breast_cancer数据集
+from sklearn.datasets import load_breast_cancer
+
+#加载数据集
+breast_cancer = load_breast_cancer()
+
+#变量x存放data全部数据;变量y存放target分类数据
+x = breast_cancer.data  
+
+y = breast_cancer.target
+
+import pandas as pd
+
+#查看breast_cancer数据集的前5条和后5条数据
+data_df = pd.DataFrame(breast_cancer.data, columns=breast_cancer.feature_names)
+
+data_df
+
+```
+
+###### *示例：*
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tongji2.png)
+
+<br/>
+
+### 1.3 线性回归
+
+- **概念和原理**
+  
+  概念：线性回归是统计学习中用于建模因变量（Y）与一个或多个自变量（X）之间线性关系的预测方法。其数学形式为 Y = β₀ + β₁X₁ + ... + βₖXₖ + ε（β为系数，ε为误差项）。
+
+  原理：核心原理是普通最小二乘法（OLS）
+
+>找一条直线/超平面，使所有点到它的距离平方和最小
+
+
+- **实践1**
+假设下表是你今年每个月的生活费表，请使用线性回归预测自己第12月份的花费是多少？
+（提示：模型y=wx+b，x相当于月份， w和b是需要通过建立线性回归模型训练得出的参数）
+
+
+月份|金额
+:---:|:---:
+1|760
+2|890
+3|820
+4|778
+5|920
+6|830
+7|1200
+8|860
+9|900
+10|990
+11|1000
+12|？
+
+
+```python
+
+from sklearn. linear_model import LinearRegression
+import numpy as np
+
+months = np. array ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]).reshape (-1, 1)
+expenses = np. array ([760, 890, 820, 778, 920, 830, 1200, 860, 900, 990, 1000])
+
+#使用sklearn的linear_model.LinearRegression()方法建模
+#使用fit方法拟合数据
+model = LinearRegression()
+model. fit (months, expenses)
+
+print('回归系数:',model.coef_)
+print ('截距:',model.intercept_)
+
+#使用predict方法预测第12月份的花费
+predicted_expense = model. predict (np. array ([[12]]))
+print('预测第12个月的花费:',predicted_expense[0])
+
+```
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tongji3.png)
+
+
+<br/>
+
+- **实践2**
+比较使用numpy的dot方法和使用for循环进行10000000个[0,1]之间随机数相乘的时间差
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tongji4.png)
+
+<br/>
+
+- **实践3**
+使用线性回归对加州房价进行预测，打印预测和mse均方误差，使用matplotlib绘制真实值和预测值折线图。
+
+```python
+from sklearn.datasets import fetch_california_housing
+
+housing = fetch_california_housing()
+X = housing.data
+y = housing.target
+
+# 查看数据集信息
+data_df.shape
+data_df.info()
+
+# 查看统计描述
+data_df.describe()
+
+# 划分特征和标签
+X = data_df.drop('MEDV', axis=1).values
+y = data_df['MEDV'].values
+
+# 划分数据集为训练集占80%，测试集占20%
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 归一化
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# 建立线性回归模型
+lr = LinearRegression()
+lr.fit(X_train_scaled, y_train)
+
+# 打印参数
+print("Coefficients:", lr.coef_)
+print("Intercept:", lr.intercept_)
+
+# 预测
+y_pred = lr.predict(X_test_scaled)
+
+# 打印均方误差
+mse = mean_squared_error(y_test, y_pred)
+print("Mean Squared Error:", mse)
+
+# 绘图
+plt.scatter(y_test, y_pred)
+plt.xlabel("Actual Prices")
+plt.ylabel("Predicted Prices")
+plt.title("Actual vs Predicted Prices")
+plt.show()
+
+```
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj1.png)
+
+
+
+
+<br/>
+
+### 1.4
+
+- **概念和原理**
+概念：逻辑回归虽名为“回归”，实则是广义线性模型下的二分类算法。它通过 Sigmoid函数:$$\sigma(x) = \frac{1}{1 + e^{-x}}$$将线性回归的输出 $z = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_k X_k$压缩到 (0,1) 区间，代表属于某一类别的概率。
+
+原理：核心估计方法为极大似然估计（MLE）。逻辑回归不计算残差平方和，而是寻找一组参数  \beta ，使得给定样本的观测结果出现的“联合概率”（似然函数）最大。
+
+<br/>
+
+- **实践1**
+基于逻辑回归实现乳腺癌预测，对sklearn自带的数据集breast_cancer进行乳腺癌预测,打印准确率分数
+```python
+
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+import pandas as pd
+
+# 加载数据
+data = load_breast_cancer()
+df = pd.DataFrame(data.data, columns=data.feature_names)
+df['target'] = data.target
+print(df.head())
+
+# 划分训练集和测试集
+X_train, X_test, y_train, y_test = train_test_split(
+    data.data, data.target, test_size=0.2, random_state=42
+)
+
+# 建立逻辑回归模型
+lr = LogisticRegression(max_iter=10000)
+lr.fit(X_train, y_train)
+
+# 预测与评估
+y_pred = lr.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print(f"乳腺癌预测准确率: {accuracy:.4f}")
+
+
+```
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj2.png)
+
+<br/>
+
+- **实践2**
+  基于逻辑回归实现鸢尾花预测，对sklearn自带的数据集鸢尾花iris进行分类预测,打印测试集的预测结果，打印准确率分数
+
+```python
+
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+import pandas as pd
+
+# 加载数据
+data = load_iris()
+df = pd.DataFrame(data.data, columns=data.feature_names)
+df['target'] = data.target
+print(df.head())
+print(df.info())
+print(df.describe())
+
+# 划分训练集和测试集
+X_train, X_test, y_train, y_test = train_test_split(
+    data.data, data.target, test_size=0.2, random_state=42
+)
+
+# 归一化
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# 建立逻辑回归模型
+lr = LogisticRegression()
+lr.fit(X_train_scaled, y_train)
+
+# 预测与评估
+y_pred = lr.predict(X_test_scaled)
+print(f"测试集预测结果: {y_pred}")
+accuracy = accuracy_score(y_test, y_pred)
+print(f"准确率: {accuracy:.4f}")
+
+```
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj3.png)
+
+<br/>
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj4.png)
+
+<br/>
+
+- **实践3**(拓展)
+   基于逻辑回归实现泰坦尼克生存预测,打印测试集的预测结果,打印准确率accuracy_score分数
+
+
+```python
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+# ========== 1. 加载数据 ==========
+train_df = pd.read_csv("F:/tjxx/train.csv")
+train_df.info()
+
+# ========== 2. 数据预处理 ==========
+
+# 舍弃与生存无关的字段
+train_df = train_df.drop(["PassengerId", "Name", "Ticket"], axis=1)
+
+# Cabin字段：判断是否为空，为空则True，否则False
+train_df["cabin"] = train_df["Cabin"].isna()
+
+# Age字段：用中位数填充缺失值
+train_df["Age"].fillna(train_df["Age"].median(), inplace=True)
+
+# Embarked字段：用出现最多的港口'S'填充缺失值
+train_df["Embarked"].fillna("S", inplace=True)
+
+# 确认无缺失值
+train_df.info()
+
+# ========== 3. 特征编码 ==========
+
+# get_dummies：将字符型转为one-hot编码
+train_df = pd.get_dummies(train_df)
+
+# ========== 4. 拆分特征和标签 ==========
+train_data = train_df.drop("Survived", axis=1)
+train_target = train_df["Survived"]
+
+# 划分训练集和测试集
+X_train, X_test, y_train, y_test = train_test_split(
+    train_data, train_target, test_size=0.2, random_state=42
+)
+
+# ========== 5. 建立模型 ==========
+model = LogisticRegression(max_iter=10000)
+model.fit(X_train, y_train)
+
+# ========== 6. 预测与评估 ==========
+y_pred = model.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print(f"泰坦尼克号生存预测准确率: {accuracy:.4f}")
+
+
+```
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj5.png)
+
+<br/>
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj6.png)
+
+<br/>
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj7.png)
+
+<br/>
+
+### 1.5 KNN
+
+- **概念和原理**
+
+
+<br/>
+
+- **实践1**
+
+
+<br/>
+
+- **实践2**
+
+
+<br/>
+
+- **实践3**
+
+
+<br/>
+
+### 1.6 决策树
+
+- **概念和原理**
+
+
+<br/>
+
+- **决策树可视化**
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj8.png)
+
+
+<br/>
+
+- **实践1** 
+  基于决策树ID3算法实现鸢尾花分类，对sklearn自带的数据集iris鸢尾花进行分类预测
+
+```python
+
+import pandas as pd
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, export_graphviz
+from sklearn.metrics import accuracy_score
+import graphviz
+
+# (1) 加载iris数据集
+iris = load_iris()
+
+# (2) 使用pandas查看数据集信息
+iris_df = pd.DataFrame(iris.data, columns=iris.feature_names)
+iris_df['target'] = iris.target
+iris_df['target_name'] = iris_df['target'].map({0: 'setosa', 1: 'versicolor', 2: 'virginica'})
+print("===== 鸢尾花数据集信息 =====")
+print(iris_df.info())
+print("\n前5行：")
+print(iris_df.head())
+
+# (3) 拆分数据集，测试集占20%
+X_train, X_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, test_size=0.2, random_state=42
+)
+print(f"\n训练集大小: {X_train.shape[0]}, 测试集大小: {X_test.shape[0]}")
+
+# (4) 基于信息熵（ID3算法）建立决策树
+clf_id3 = DecisionTreeClassifier(criterion='entropy', random_state=42)
+clf_id3.fit(X_train, y_train)
+
+# (5) 对测试集进行预测
+y_pred = clf_id3.predict(X_test)
+
+# (6) 打印准确率
+acc = accuracy_score(y_test, y_pred)
+print(f"\nID3决策树准确率: {acc:.4f}")
+
+# (7) 使用graphviz绘制决策树，生成id3_iris.pdf
+dot_data = export_graphviz(
+    clf_id3,
+    feature_names=iris.feature_names,
+    class_names=iris.target_names,
+    filled=True,
+    rounded=True
+)
+graph = graphviz.Source(dot_data)
+graph.render('id3_iris', cleanup=True)
+print("决策树图形已生成: id3_iris.pdf")
+
+```
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj9.png)
+
+<br/>
+
+![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/tj10.png)
+
+<br/>
+
+- **实践2**
+基于决策树算法实现葡萄酒分类，对sklearn自带的数据集wine进行分类预测
+
+<br/>
+
+- **实践3**
+基于决策树实现泰坦尼克生存预测
+
+<br/>
+
+### 1.7 支持向量机
+
+- **概念和原理**
+
+<br/>
+
+- **实践1**
+
+
+<br/>
+
+- **实践2**
+
+
+<br/>
+
+- **实践3**
+
+---
+
+## 二、机器学习
+
+---
+
+## 三、深度学习
 
 ---
 
