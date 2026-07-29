@@ -1,7 +1,449 @@
-\documentclass{ctexart}
+\documentclass[12pt,a4paper]{ctexart}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+
+\tcbuselibrary{breakable}
+
+\definecolor{mlblue}{RGB}{52,101,164}
+\definecolor{mlorange}{RGB}{204,119,34}
+\definecolor{mlgreen}{RGB}{78,154,6}
+
+\newtcolorbox{funbox}[1][]{
+  colback=mlblue!5!white,
+  colframe=mlblue!60!black,
+  fonttitle=\bfseries,
+  title=#1,
+  breakable,
+  rounded corners,
+  boxrule=0.8pt
+}
+
+\titleformat{\section}{\Large\bfseries\color{mlblue}}{第\,\thesection\,部分：}{0.5em}{}
+\titleformat{\subsection}{\large\bfseries\color{mlorange}}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{mlgreen}}{\thesubsubsection}{0.5em}{}
+
+\title{\textbf{Principle and Model} \\ \large 机器学习原理及模型入门}
+\author{报告者：刘欣雨}
+\date{\today}
 
 \begin{document}
 
-测试中文输出
+\maketitle
+
+\begin{abstract}
+此报告没有复杂的数学公式，偏向于用易于理解的方式了解机器学习、深度学习以及强化学习。部分内容参考了吴恩达老师的《机器学习》课程精华。
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% ============================================================
+% 第一部分：基本原理
+% ============================================================
+\section{基本原理}
+
+\subsection{机器学习是什么}
+
+\begin{funbox}[一句话解释]
+机器学习就是让计算机从数据中"学"出规律，而不是靠人一条一条写规则。
+\end{funbox}
+
+想象一下，你怎么教一个三岁小孩认"猫"？你不会给他写一本《猫的特征手册》（两条腿、有尾巴、会喵叫……），你只是不断地给他看猫的图片，说"这是猫"，看多了，他自己就学会了。机器学习也是这个道理——给它大量数据，它自己找规律。
+
+吴恩达老师有个经典定义：机器学习是"让计算机在没有明确编程的情况下拥有学习能力"的学科。简单说，\textbf{不是写代码告诉它怎么做，而是给它数据让它自己悟}。
+
+\subsection{深度学习是什么}
+
+\begin{funbox}[一句话解释]
+深度学习是机器学习的一个分支，用"很多层"的神经网络来提取特征，层数越深越"深"。
+\end{funbox}
+
+如果把机器学习比作一条生产线，那深度学习就是一条\textbf{多层筛选流水线}：第一层筛选出边缘和颜色，第二层筛选出纹理和形状，第三层组合出猫耳朵和猫脸……每一层都在上一层的输出上进一步加工，层层递进，最终识别出"这是一只猫"。这就是"深度"的含义——不是思想深刻，而是\textbf{网络层数多}。
+
+\subsection{强化学习是什么}
+
+\begin{funbox}[一句话解释]
+强化学习是让智能体通过"试错+奖励"来学习最优策略。
+\end{funbox}
+
+你训练小狗做动作时怎么做？坐下了给零食，乱跑就不给。小狗慢慢学会了"坐下有肉吃"。\textbf{强化学习就是"训练小狗"的数学版}——智能体在环境里不断尝试，做对了拿奖励，做错了扣分，最终学会在什么情况下做什么动作能拿最多的奖励。
+
+\subsection{训练的过程}
+
+\begin{funbox}[一句话解释]
+训练 = 做题 $\to$ 对答案 $\to$ 调整方法，反复循环直到正确率满意为止。
+\end{funbox}
+
+就像你做数学题：先用当前的方法算一遍（前向传播），然后对标准答案看差多少（算损失），再根据差距调整自己的解题思路（反向传播+参数更新）。每做一轮就是一步训练，做得越多，方法越好——当然前提是方法别跑偏。
+
+\subsection{前向传播}
+
+\begin{funbox}[一句话解释]
+数据从输入层一路流到输出层，每经过一层就算一次，最终得到预测结果。
+\end{funbox}
+
+就像流水线上产品从第一道工序流向最后一道工序，信息在网络里也是\textbf{从前往后一路流过去}，中间没有回头路。输入图片像素 $\to$ 第一层提取边缘 $\to$ 第二层组合纹理 $\to$ …… $\to$ 最后一层输出"这是猫的概率=0.93"。这个从输入到输出的单向计算过程，就叫前向传播。
+
+\subsection{反向传播}
+
+\begin{funbox}[一句话解释]
+从最终误差倒着往回算，找出每一层该背多少"锅"，然后调整参数。
+\end{funbox}
+
+假如预测结果说"这是猫0.93"但实际是狗，那误差出在哪？\textbf{反向传播就是从结果倒推，找出谁的锅}——最后一层的权重贡献了多少误差？倒数第二层呢？一层一层往回追责，搞清楚每个参数该负多少责任，然后相应地调整它。这就是神经网络能"学习"的核心机制。
+
+\subsection{收敛}
+
+\begin{funbox}[一句话解释]
+训练过程中，损失越来越小，最终稳定下来不再大幅波动，就是"收敛"了。
+\end{funbox}
+
+想象你蒙着眼在山里往下走，一开始跌跌撞撞，后来越走越稳，最终站在一个谷底不动了——这个"摇摇晃晃最终站稳"的过程就是收敛。不过要注意，你可能站在的是一个小坑（局部最优）而不是最低的大谷底（全局最优），这正是优化算法要解决的难题。
+
+\subsection{过拟合与欠拟合}
+
+\begin{funbox}[一句话解释]
+过拟合 = 死记硬背，考试题都会但换个题就傻眼；欠拟合 = 压根没学，啥也不会。
+\end{funbox}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{过拟合}：模型把训练数据的每个细节都记住了，连噪声都背下来。就像一个学生把历年真题答案全背了，遇到新题就懵圈。
+  \item \textbf{欠拟合}：模型太简单，连训练数据的规律都没学出来。就像上课全程走神，连基本概念都没掌握。
+\end{itemize}
+
+好模型应该在两者之间——既学到规律，又不死记硬背。吴恩达老师建议用训练集和验证集的误差对比来判断：训练集好但验证集差 $\to$ 过拟合；两个都差 $\to$ 欠拟合。
+
+\subsection{损失函数}
+
+\begin{funbox}[一句话解释]
+损失函数就是"考试打分"，分越低说明预测越准，我们训练的目标就是让这个分数尽量低。
+\end{funbox}
+
+你考了80分，同学考了95分，谁的损失更小？当然是95分的。损失函数就是在衡量"预测值和真实值差多少"。常见的有均方误差（MSE）用于回归、交叉熵用于分类。训练的全部目的，就是\textbf{让损失函数的值尽量小}。
+
+\subsection{梯度下降}
+
+\begin{funbox}[一句话解释]
+蒙着眼下山，脚探一探，哪边低就往哪走一步，走到底就是山谷。
+\end{funbox}
+
+梯度下降是最核心的优化方法。想象你被蒙住眼扔到一座山上，要走到谷底。你只能用脚探一探周围，感受哪边坡度往下，就往那个方向迈一步。\textbf{梯度就是坡度的方向和大小}，学习率就是你每一步迈多大——步子太大可能跨过谷底，步子太小走得太慢.选择合适的学习率至关重要。
+
+\newpage
+
+% ============================================================
+% 第二部分：基本模型
+% ============================================================
+\section{基本模型}
+
+% ---------- A. Supervised Learning ----------
+\subsection{经典监督学习（Supervised Learning）}
+
+监督学习的核心：\textbf{有老师教}——每个训练样本都带着标准答案（标签），模型照着答案学。
+
+\subsubsection{1. 线性回归（Linear Regression）}
+
+\begin{funbox}[Linear Regression]
+\textbf{一句话}：用一条直线去拟合数据，预测连续数值。
+
+\textbf{场景}：根据房屋面积预测房价，根据学习时长预测分数，根据广告投入预测销量。
+
+\textbf{指标}：MSE（均方误差）——预测值和真实值差的平方的平均；$R^2$——模型解释了多少数据的变化。
+
+\textbf{对比}：是所有回归模型的起点，逻辑回归就是在它基础上把输出压到0到1之间。
+\end{funbox}
+
+\subsubsection{2. 逻辑回归（Logistic Regression）}
+
+\begin{funbox}[Logistic Regression]
+\textbf{一句话}：虽然叫"回归"，但其实是个分类器，用sigmoid函数把输出压到0\textasciitilde1之间当概率用。
+
+\textbf{场景}：判断邮件是否垃圾邮件、判断肿瘤是否恶性、判断用户是否会点击广告。
+
+\textbf{指标}：准确率、F1分数（精确率和召回率的调和平均）、AUC-ROC（分类阈值变化时整体表现的衡量）。
+
+\textbf{对比}：线性回归预测连续值，逻辑回归预测概率做分类；本质上就是线性回归外面套了个sigmoid。
+\end{funbox}
+
+\subsubsection{3. 决策树（Decision Tree）}
+
+\begin{funbox}[Decision Tree]
+\textbf{一句话}：像玩"20个问题"游戏一样，通过一系列判断条件一步步缩小范围，最终得出结论。
+
+\textbf{场景}：贷款审批（收入>5万？$\to$ 有房？$\to$ ...）、医疗辅助诊断、客户流失预测。
+
+\textbf{指标}：基尼系数（越小说明分得越纯）、信息熵（衡量混乱程度，越纯越小）。
+
+\textbf{对比}：与线性模型不同，决策树天然能处理非线性关系和特征交互，可解释性强，但容易过拟合。
+\end{funbox}
+
+\subsubsection{4. 朴素贝叶斯（Naive Bayes）}
+
+\begin{funbox}[Naive Bayes]
+\textbf{一句话}：基于贝叶斯定理，假设各特征之间相互独立（"朴素"就在这），算出属于各类别的概率。
+
+\textbf{场景}：垃圾邮件过滤（"免费""优惠"出现 $\to$ 垃圾概率高）、文本分类、情感分析。
+
+\textbf{指标}：准确率、F1分数。
+
+\textbf{对比}：逻辑回归是直接学决策边界，朴素贝叶斯是先学概率分布再做决策；朴素贝叶斯训练更快，逻辑回归通常精度更高。
+\end{funbox}
+
+% ---------- B. Advanced Supervised ----------
+\subsection{进阶监督学习}
+
+\subsubsection{5. 支持向量机（SVM）}
+
+\begin{funbox}[SVM]
+\textbf{一句话}：找一条最"宽"的分界线把两类数据分开，让离边界最近的点（支持向量）尽可能远离分界线。
+
+\textbf{场景}：图像分类、文本分类、小样本下的高维分类问题。
+
+\textbf{指标}：准确率、F1分数。
+
+\textbf{对比}：逻辑回归追求所有点都分对，SVM只关心边界附近的点——所以SVM在高维小样本时往往更鲁棒。
+\end{funbox}
+
+\subsubsection{6. 随机森林（Random Forest）}
+
+\begin{funbox}[Random Forest]
+\textbf{一句话}：建一堆各自有点不同的决策树，每棵树独立投票，少数服从多数——"三个臭皮匠，顶个诸葛亮"。
+
+\textbf{场景}：特征多的大数据集、金融风控、电商推荐、医疗诊断。
+
+\textbf{指标}：OOB误差（袋外估计，自带验证集）、准确率。
+
+\textbf{对比}：单棵决策树容易过拟合，随机森林通过"多棵树投票+随机选特征"大幅降低过拟合风险。
+\end{funbox}
+
+\subsubsection{7. 梯度提升（Gradient Boosting）}
+
+\begin{funbox}[Gradient Boosting]
+\textbf{一句话}：一棵树先粗略拟合，下一棵树专门拟合上一棵的残差，一棵接一棵"接力纠错"。
+
+\textbf{场景}：Kaggle竞赛常胜将军、表格数据分析、搜索排序、保险定价。
+
+\textbf{指标}：准确率、NDCG（归一化折损累积增益，衡量排序质量）。
+
+\textbf{对比}：随机森林是"并行投票"，梯度提升是"串行纠错"——后者通常精度更高但更容易过拟合，需要仔细调参。
+\end{funbox}
+
+% ---------- C. Unsupervised Learning ----------
+\subsection{无监督学习（Unsupervised Learning）}
+
+无监督学习：\textbf{没有标准答案}，模型自己从数据中找结构、找模式。
+
+\subsubsection{8. K-Means聚类}
+
+\begin{funbox}[K-Means]
+\textbf{一句话}：事先定好要分K个群，随机放K个中心点，然后把每个数据点归到最近的中心，再更新中心位置，反复迭代直到稳定。
+
+\textbf{场景}：客户分群（高消费/低消费/潜力客户）、图像压缩、异常检测。
+
+\textbf{指标}：轮廓系数（衡量聚类紧密度和分离度）、SSE（簇内误差平方和，越小越紧凑）。
+\end{funbox}
+
+\subsubsection{9. 层次聚类（Hierarchical Clustering）}
+
+\begin{funbox}[Hierarchical Clustering]
+\textbf{一句话}：从每个点各成一个簇开始，不断把最近的两个簇合并，最终形成一棵"族谱树"。
+
+\textbf{场景}：物种分类、基因聚类、组织架构分析。
+
+\textbf{指标}：树状图（Dendrogram，可视化聚类过程和层次关系）。
+
+\textbf{对比}：K-Means需要预先指定K，层次聚类不需要；层次聚类结果可解释但计算量大，K-Means快但只能找球形簇。
+\end{funbox}
+
+\subsubsection{10. 主成分分析（PCA）}
+
+\begin{funbox}[PCA]
+\textbf{一句话}：找到数据变化最大的方向，把高维数据投影到这些方向上，用更少的维度保留最多的信息。
+
+\textbf{场景}：降维后可视化（把100维数据压到2维画图）、加速训练、去噪。
+
+\textbf{指标}：方差解释率（各主成分保留了多少原始数据的方差/信息量）。
+\end{funbox}
+
+\subsubsection{11. t-SNE}
+
+\begin{funbox}[t-SNE]
+\textbf{一句话}：一种专门为可视化设计的降维方法，让高维中相近的点在2D/3D中也挨在一起。
+
+\textbf{场景}：高维数据可视化（手写数字、基因表达数据的2D展示）。
+
+\textbf{指标}：视觉分离度——看图上不同类别是否分得开。
+
+\textbf{对比}：PCA是线性降维，保留全局结构；t-SNE是非线性降维，保留局部邻居关系，可视化效果好但不能用于特征提取。
+\end{funbox}
+
+% ---------- D. Neural Network ----------
+\subsection{神经网络（Neural Network）}
+
+\subsubsection{12. 多层感知机（MLP）}
+
+\begin{funbox}[MLP]
+\textbf{一句话}：逻辑回归加了隐藏层，隐藏层能学到非线性的特征组合。
+
+\textbf{场景}：通用非线性分类/回归、表格数据的深度学习基线。
+
+\textbf{对比}：就是"加了隐藏层的逻辑回归"——没有隐藏层时退化为逻辑回归，加了隐藏层后就能学习复杂的非线性决策边界。
+\end{funbox}
+
+\subsubsection{13. 卷积神经网络（CNN）}
+
+\begin{funbox}[CNN]
+\textbf{一句话}：用"滑动窗口"在图像上扫来扫去，每次只看一小块区域，提取局部特征（边缘、纹理等）。
+
+\textbf{场景}：图像分类、目标检测、人脸识别、医学影像分析。
+
+\textbf{为什么适合图像}：图像的局部像素关联很强（猫耳朵的像素挨在一起），CNN用小窗口滑动，天然适合提取这种局部特征，而且参数共享大大减少了参数量。
+\end{funbox}
+
+\subsubsection{14. 循环神经网络（RNN）}
+
+\begin{funbox}[RNN]
+\textbf{一句话}：有"记忆"的网络，处理当前输入时会参考之前看到的信息。
+
+\textbf{场景}：文本生成、机器翻译、语音识别、股票时序预测。
+
+\textbf{为什么适合序列}：句子中每个词的含义取决于上下文，RNN的隐状态就像一个不断更新的"笔记本"，记录了之前看过的内容，所以适合处理有先后顺序的数据。不过标准RNN记忆很短，后来LSTM和GRU解决了这个问题。
+\end{funbox}
+
+% ---------- E. Transformer ----------
+\subsection{Transformer}
+
+\subsubsection{15. 自注意力机制（Self-Attention）}
+
+\begin{funbox}[Self-Attention]
+\textbf{一句话}：每个词都看看句子中其他词在干嘛，决定自己该关注谁、关注多少。
+
+比如"这只猫很可爱，它喜欢睡觉"中的"它"，需要注意到"猫"才能知道"它"指代什么。自注意力机制让每个位置都能直接和其他位置"对话"，不用像RNN那样一步步传信息。
+\end{funbox}
+
+\subsubsection{16. 多头注意力（Multi-Head Attention）}
+
+\begin{funbox}[Multi-Head Attention]
+\textbf{一句话}：多组"视角"同时看——有的头关注语法关系，有的关注语义相似，有的关注位置远近，最后把各头的发现汇总。
+
+就像你看一幅画，有人看构图，有人看色彩，有人看细节，每个人角度不同但合起来理解更全面。
+\end{funbox}
+
+\subsubsection{17. BERT 与 GPT}
+
+\begin{funbox}[BERT \& GPT]
+\textbf{BERT}：双向编码器，同时看上下文两边。预训练任务是"完形填空"——随机遮住一些词，让模型根据上下文猜被遮的词。擅长理解语义，适合分类、问答、匹配等任务。
+
+\textbf{GPT}：单向解码器，只看上文（从左到右）。预训练任务是"续写作文"——根据前文预测下一个词。擅长生成文本，适合对话、写作、代码生成等任务。
+
+\textbf{一句话区别}：BERT是"完形填空高手"，GPT是"续写作文能手"。
+\end{funbox}
+
+\subsubsection{18. ViT（Vision Transformer）}
+
+\begin{funbox}[ViT]
+\textbf{一句话}：把图片切成一个个小方块（patch），把每个小方块当作一个"词"，然后像处理文本一样用Transformer处理。
+
+为什么能行？因为注意力机制不在乎输入是文字还是图片像素，只要切成序列就行。数据量够大时，ViT甚至超越了传统CNN。
+\end{funbox}
+
+% ---------- F. Generative Models ----------
+\subsection{生成模型（Generative Models）}
+
+\subsubsection{19. 生成对抗网络（GAN）}
+
+\begin{funbox}[GAN]
+\textbf{一句话}：两个网络对抗训练——生成器负责造假，判别器负责验真，互相博弈，最终生成器造的假货连判别器都认不出。
+
+\textbf{场景}：生成逼真的人脸、图像超分辨率、风格迁移、数据增强。
+
+\textbf{类比}：就像造假币的vs验钞机，假币越做越真，验钞机越来越厉害，双方共同进步。
+\end{funbox}
+
+\subsubsection{20. 变分自编码器（VAE）}
+
+\begin{funbox}[VAE]
+\textbf{一句话}：把数据压缩到一个有规律的潜在空间里，再从潜在空间还原回来，压缩+重建=学会数据分布。
+
+\textbf{场景}：图像生成、数据压缩与重建、药物分子生成。
+
+\textbf{对比}：GAN生成的图像更锐利但训练不稳定；VAE生成更模糊但训练稳定，且潜在空间有良好的数学结构，可以插值生成中间状态。
+\end{funbox}
+
+\subsubsection{21. 扩散模型（Diffusion Model）}
+
+\begin{funbox}[Diffusion Model]
+\textbf{一句话}：先给图片不断加噪直到变成纯噪点，然后训练网络学会一步步把噪点去掉，从噪点中慢慢还原图像。
+
+\textbf{场景}：AI画图（Stable Diffusion、DALL·E、Midjourney）。
+
+\textbf{类比}：就像你把一滴墨水滴进水里扩散开，扩散模型学会"倒放这个过程"——从均匀的浑水中一点一点把墨滴"收"回来。
+\end{funbox}
+
+% ---------- G. Reinforcement Learning ----------
+\subsection{强化学习（Reinforcement Learning）}
+
+\subsubsection{22. Q-Learning}
+
+\begin{funbox}[Q-Learning]
+\textbf{一句话}：维护一张"记分牌"（Q表），记录在每个状态下做每个动作能拿多少分，选分数最高的动作就行。
+
+\textbf{场景}：简单游戏的AI、机器人路径规划、迷宫求解。
+
+\textbf{类比}：就像你记住了"在这个路口左转能拿10分，右转能拿5分"，下次到这个路口你就左转。
+\end{funbox}
+
+\subsubsection{23. 深度强化学习（DRL）}
+
+\begin{funbox}[DRL]
+\textbf{一句话}：状态太多Q表存不下？用神经网络代替Q表，输入状态，输出每个动作的Q值。
+
+\textbf{场景}：Atari游戏、围棋（AlphaGo）、自动驾驶决策。
+
+\textbf{对比}：Q-Learning用表格存分数，DRL用神经网络"猜"分数——状态空间巨大时表格不现实，神经网络可以泛化到没见过的状态。
+\end{funbox}
+
+\subsubsection{24. AutoGPT / 自主Agent}
+
+\begin{funbox}[AutoGPT]
+\textbf{一句话}：让大语言模型自己设定目标、自己拆解任务、自己调用工具、自己评估结果，尽量减少人类干预。
+
+\textbf{场景}：自动调研写报告、自主编程调试、连续执行多步骤任务。
+
+注意：目前自主Agent还很不成熟，经常跑偏或陷入循环，但这是AI发展的重要方向——从"你问我答"变成"我帮你做"。
+\end{funbox}
+
+% ---------- H. Optimization & Evaluation ----------
+\subsection{优化与评估}
+
+\subsubsection{25. 交叉验证（Cross Validation）}
+
+\begin{funbox}[Cross Validation]
+\textbf{一句话}：把数据分成几份，轮流拿一份当测试集、其余当训练集，多次考试取平均，避免一次考好就膨胀。
+
+最常用的是K折交叉验证：把数据分成K份，做K次训练和验证，取K次结果的平均。这样评估结果更可靠，不会因为数据划分的运气成分而偏差太大。
+\end{funbox}
+
+\subsubsection{26. 超参数调优（Hyperparameter Tuning）}
+
+\begin{funbox}[Hyperparameter Tuning]
+\textbf{一句话}：调模型的各种"旋钮"（学习率、树的数量、正则化强度等），找到最佳画面。
+
+\textbf{类比}：就像调老电视的旋钮——亮度、对比度、色调，每个旋钮转一点画面就变，要耐心地调到最佳效果。常见方法有网格搜索（每个旋钮转一圈试一遍）、随机搜索（随机转几次碰运气）、贝叶斯优化（根据之前的结果猜下一个好位置）。
+\end{funbox}
+
+\subsubsection{27. 特征工程（Feature Engineering）}
+
+\begin{funbox}[Feature Engineering]
+\textbf{一句话}：在把数据喂给模型之前，先把"食材"切好、配好、选好，让模型更容易学。
+
+\textbf{类比}：就像做饭——同样的原材料，切配方式不同，做出来的味道天差地别。特征工程包括：特征选择（扔掉没用的食材）、特征构造（把两种食材组合出新味道）、特征缩放（统一量纲，别让盐和水的量级差距太大）。
+
+在传统机器学习中，特征工程做得好，比模型选得花哨更重要。
+\end{funbox}
 
 \end{document}
