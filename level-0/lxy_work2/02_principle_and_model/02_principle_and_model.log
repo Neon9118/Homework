@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.7.17)  31 JUL 2026 20:07
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.7.17)  31 JUL 2026 20:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**01_principle_and_model
-(./01_principle_and_model.tex
+**02_principle_and_model
+(./02_principle_and_model.tex
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-06-18>
 (d:/texlive/2026/texlive/2026/texmf-dist/tex/latex/ctex/ctexart.cls (d:/texlive/2026/texlive/2026/texmf-dist/tex/latex/ctex/config/ctexbackend.cfg
@@ -713,8 +713,8 @@ Package pdfcol Info: pdfTeX's color stacks are not available.
 \tcb@testbox=\box79
 \tcb@totalupperbox=\box80
 \tcb@totallowerbox=\box81
-) (./01_principle_and_model.aux)
-\openout1 = `01_principle_and_model.aux'.
+) (./02_principle_and_model.aux)
+\openout1 = `02_principle_and_model.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
 LaTeX Font Info:    ... okay on input line 33.
@@ -830,11 +830,11 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring OFF on input line 33.
-(./01_principle_and_model.out) (./01_principle_and_model.out)
+(./02_principle_and_model.out) (./02_principle_and_model.out)
 \@outlinefile=\write4
-\openout4 = `01_principle_and_model.out'.
+\openout4 = `02_principle_and_model.out'.
 
- (./01_principle_and_model.toc
+ (./02_principle_and_model.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 2.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -845,16 +845,16 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 ])
 \tf@toc=\write5
-\openout5 = `01_principle_and_model.toc'.
+\openout5 = `02_principle_and_model.toc'.
 
 LaTeX Font Info:    Font shape `TU/SimSun(0)/m/sl' in size <12> not available
 (Font)              Font shape `TU/SimSun(0)/m/it' tried instead on input line 42.
- [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] (./01_principle_and_model.aux)
+ [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] (./02_principle_and_model.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026/07/04>
  ***********
-Package rerunfilecheck Info: File `01_principle_and_model.out' has not changed.
+Package rerunfilecheck Info: File `02_principle_and_model.out' has not changed.
 (rerunfilecheck)             Checksum: 486934B8DFADFE27B7713078D90CC13D;7691.
  ) 
 Here is how much of TeX's memory you used:
@@ -866,4 +866,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  116i,7n,121p,528b,648s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 01_principle_and_model.pdf (13 pages).
+Output written on 02_principle_and_model.pdf (13 pages).
