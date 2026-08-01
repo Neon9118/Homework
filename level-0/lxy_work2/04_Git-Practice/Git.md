@@ -1,4 +1,20 @@
-# 第三部分：Git和GitHub
+# 第二章节：Git和GitHub
+
+---
+
+- [第二章节：Git和GitHub](#第二章节git和github)
+  - [一、Repository](#一repository)
+    - [1.1 工作区](#11-工作区)
+    - [1.2 暂存区](#12-暂存区)
+    - [1.3 本地仓库](#13-本地仓库)
+  - [二、Commit](#二commit)
+  - [三、Branch](#三branch)
+    - [3.1 Creat](#31-creat)
+    - [3.2 Merge](#32-merge)
+  - [四、Remote](#四remote)
+    - [4.1 代理](#41-代理)
+    - [4.2 用SSH代替HTTPS](#42-用ssh代替https)
+
 
 ---
 
@@ -29,6 +45,8 @@
 <br/>
 
 
+---
+
 ## 二、Commit
 ![](https://i.ibb.co/qYbG1TmZ/gitcommit.png)
 >在提交时要简单描述，提交的标题不能是空
@@ -37,6 +55,8 @@
 
 ![](https://i.ibb.co/dwJCdH1y/gitlog.png)
 <br/>
+
+---
 
 ## 三、Branch
 
@@ -48,6 +68,7 @@
 ### 3.2 Merge
 
 ![](https://i.ibb.co/394VKpxS/gitmerge.png)
+
 ---
 
 ## 四、Remote
