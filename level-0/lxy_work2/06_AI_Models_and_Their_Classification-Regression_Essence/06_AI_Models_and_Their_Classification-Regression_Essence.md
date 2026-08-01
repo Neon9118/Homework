@@ -35,11 +35,11 @@
 
 - 已本地部署 DeepSeek 7b 以及gemma:2b模型（对应 Prompt + RAG 层级）
 
-![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/AI1.png)
+![](https://i.ibb.co/7xYr43hr/AI1.png)
 
 <br/>
 
-![](f:/personal/Desktop/Homework/研0/刘欣雨_作业2/picture/AI2.png)
+![](https://i.ibb.co/LXvtTKxW/AI2.png)
 
 <br/>
 >后续可使用 LoRA 微调，让模型深入学习三个研究方向的专业知识

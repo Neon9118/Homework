@@ -42,12 +42,11 @@ D = A .* A      % 逐元素乘（点运算）
   A=$\begin{bmatrix} 1 & 1.5 & 2 & 9 & 7 \\ 0 & 3.6 & 0.5 & -4 & 4\\ 7 & 10 & -3 & 22 & 33 \\ 3 & 7 & 8.5 &21 & 6 \\ 3 & 8 & 0 & 90 & -20\end{bmatrix}$,B=$\begin{bmatrix}  3 \\  -4 \\ 20 \\ 5 \\ 16 \end{bmatrix}$,X=?
 
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt1.png)
+![](https://i.ibb.co/gbH2P1Lg/mt1.png)
 
 **【例2】  求方程 $x^4 + 7x^3 +9x-20=0$的全部根**
 
-  ![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt2.png)
-
+![](https://i.ibb.co/7dc28d5m/mt2.png)
 
 
 
@@ -60,7 +59,7 @@ D = A .* A      % 逐元素乘（点运算）
   
 **【例1】  求一元二次方程$a^2 +bx+c=0$的根。**
   
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt3.png)
+![](https://i.ibb.co/SDbFs0vH/mt3.png)
 
 - ### pause函数
   暂停程序的执行。
@@ -79,7 +78,7 @@ D = A .* A      % 逐元素乘（点运算）
         disp(A)
 ```
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt4.png)
+![](https://i.ibb.co/tMjhrzvJ/mt4.png)
 
 ## 四、程序设计
 
@@ -117,13 +116,12 @@ end
 ```
 **【例1】输入三角形的三条边，求面积。** 
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt5.png)
+![](https://i.ibb.co/gMTKYHWd/mt5.png)
 
 
 **【例2】  输入一个字符，若为大写字母，则输出其后继字符，若为小写字母，则输出其前导字符，若为其他字符则原样输出。**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt6.png)
-
+![](https://i.ibb.co/MkkKL3sH/mt6.png)
 
 
 - #### switch语句
@@ -149,7 +147,7 @@ end
 
 **【例3】  根据变量 num 的值来决定显示的内容。**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt7.png)
+![](https://i.ibb.co/1H3fRYq/mt7.png)
 
 
 ### 2、循环结构
@@ -181,7 +179,7 @@ end
 
 **【例4】  求[100,1000]以内的全部素数。**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt8.png)
+![](https://i.ibb.co/Kcc8NQ1b/mt8.png)
 
 ---
 ## 五、函数文件
@@ -201,7 +199,7 @@ end
 
 **【例5】  编写函数文件求小于任意自然数n的Fibonacci数列各项。**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt9.png)
+![](https://i.ibb.co/nsgFMKLQ/mt9.png)
 
 ### 2．函数调用
 函数文件编制好后，就可调用函数进行计算了。
@@ -213,7 +211,7 @@ end
 ```
 **【例6】  利用函数的递归调用，求n！。**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt10.png)
+![](https://i.ibb.co/TxghmCpc/mt10.png)
 
 
 ### 3 ．函数所传递参数的可调性
@@ -222,7 +220,7 @@ MATLAB在函数调用上有一个与众不同之处：函数所传递参数数�
 
 **【例7】  nargin用法示例**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt11.png)
+![](https://i.ibb.co/vvwtsK8W/mt11.png)
 
 
 ## 六、全局变量和局部变量
@@ -230,7 +228,7 @@ MATLAB在函数调用上有一个与众不同之处：函数所传递参数数�
 
 **【例8】  全局变量应用示例**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt12.png)
+![](https://i.ibb.co/7NrW4D9G/mt12.png)
 
 ---
 # 第二部分：文件操作
@@ -241,32 +239,30 @@ Matlab环境下的文件与其它系统一样，也有二类文件组成，一�
 ### 1.help  帮助命令
   ` help 命令名`
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt13.png)
+![](https://i.ibb.co/yB44WjZF/mt13.png)
 
 
 
 ### 2. what  显示目录内容命令
  `what [目录名]`
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/MT14.png)
+![](https://i.ibb.co/Zpx15TWC/MT14.png)
 
 
 ### 3．type 显示文件内容命令
 `type 文件名`
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt15.png)
-
+![](https://i.ibb.co/pGscypR/mt15.png)
 
 ### 4.寻找命令
 `lookfor  命令或字符串`
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt16.png)
-
+![](https://i.ibb.co/x850xFx1/mt16.png)
 
 ### 5．which 寻找函数命令
 `which  函数名`
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt17.png)
+![](https://i.ibb.co/SwGCpt8f/mt17.png)
 
 
 ### 6 ．path 路径控制命令
@@ -367,8 +363,7 @@ inf|读取整个文件。
 
 **例1**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt18.png)
-
+![](https://i.ibb.co/YFrbwz3x/mt18.png)
 
 ### 2.文本文件
 
@@ -380,7 +375,7 @@ inf|读取整个文件。
 `COUNT= fprintf(Fid, format, A,…)`
 >其中A为要写入文件的数据矩阵，先按format格式化数据矩阵A，后写入到Fid所指定的文件。
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt19.png)
+![](https://i.ibb.co/PZPvXHMJ/mt19.png)
 
 
 
@@ -396,7 +391,7 @@ inf|读取整个文件。
 
 **【例2】下述程序段说明了函数fseek和ftell的使用。**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt20.png)
+![alt text](https://i.ibb.co/8DjsfBMg/mt20.png)
 
 ---
 # 第三部分：绘图功能
@@ -411,7 +406,7 @@ inf|读取整个文件。
 
 **【例1】同时绘制正、余弦两条曲线$Y_1=SIN（X）$和$Y_2=COS（X）$**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/mt21.png)
+![](https://i.ibb.co/spT6ct2L/mt21.png)
 
 
 - #### 线型与颜色:`plot(x,y1,’cs’,...)`
@@ -419,7 +414,7 @@ inf|读取整个文件。
 
 **【例2】 用不同线型和颜色重新绘制例1图形**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA1.png)
+![](https://i.ibb.co/b5BhgLkT/AA1.png)
 
 >其中参数'go'和'b-.'表示图形的颜色和线型。g表示绿色，o表示图形线型为圆圈；b表示蓝色，-.表示图形线型为点划线。
 
@@ -444,7 +439,7 @@ inf|读取整个文件。
 
 **【例3】 在坐标范围$0≤X≤2π$,$-2≤Y≤2$内重新绘制正弦曲线**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA2.png)
+![](https://i.ibb.co/sp5TCSB1/AA2.png)
 
 
 
@@ -452,7 +447,7 @@ inf|读取整个文件。
 >把图例放置在图形空白处，用户还可以通过鼠标移动图例，将其放到希望的位置。
 `legend('图例说明','图例说明');`  
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA3.png)
+![](https://i.ibb.co/nsc83YLf/AA3.png)
 
 
 ### 2.subplot函数
@@ -464,21 +459,20 @@ inf|读取整个文件。
 
 **【例4】 在一个图形窗口中同时绘制正弦、余弦、正切、余切曲线**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA4.png)
+![](https://i.ibb.co/Rkvv8mVZ/AA4.png)
 
 
 - #### 多图形窗口
 需要建立多个图形窗口，绘制并保持每一个窗口的图形，可以使用`figure`命令。
 >每执行一次figure命令，就创建一个新的图形窗口，该窗口自动为活动窗口，若需要还可以返回该窗口的识别号码，称该号码为句柄。句柄显示在图形窗口的标题栏中，即图形窗口标题。用户可通过句柄激活或关闭某图形窗口，而`axis`、`xlabel`、`title`等许多命令也只对活动窗口有效。
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA5.png)
+![](https://i.ibb.co/vxqLdG2J/AA5.png)
 
 
 - #### hold命令
 若在已存在图形窗口中用plot命令继续添加新的图形内容，可使用图形保持命令hold。发出命令hold on后，再执行plot命令，在保持原有图形或曲线的基础上，添加新绘制的图形。
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA6.png)
-
+![](https://i.ibb.co/Rps0ktv3/AA6.png)
 
 ### 3.函数f(x)曲线
 fplot函数则可自适应地对函数进行采样，能更好地反应函数的变化规律。
@@ -487,7 +481,7 @@ fplot函数则可自适应地对函数进行采样，能更好地反应函数的
 
 **【例5】 为绘制$f(x)=cos(tan(πx))$曲线，可先建立函数文件fct.m**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA7.png)
+![](https://i.ibb.co/NdHVqSwY/AA7.png)
 
 ---
 
@@ -499,13 +493,13 @@ fplot函数则可自适应地对函数进行采样，能更好地反应函数的
 
 **【例6】 绘制y=|1000sin(4x)|+1的双对数坐标图。**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA8.png)
+![](https://i.ibb.co/39rqjKw2/AA8.png)
 
 - #### 单对数坐标
 
 **【例7】分别以X轴，y轴为对数重新绘制例6曲线**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/aa9.png)
+![](https://i.ibb.co/nskMc2Nm/aa9.png)
 
 ### 2.极坐标图
 
@@ -514,7 +508,7 @@ fplot函数则可自适应地对函数进行采样，能更好地反应函数的
 
 **【例8】 绘制$sin(2θ)cos(2θ)$（即四叶玫瑰线）的极坐标图**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA10.png)
+![](https://i.ibb.co/VYbTtQc5/AA10.png)
 
 ---
 
@@ -523,19 +517,18 @@ fplot函数则可自适应地对函数进行采样，能更好地反应函数的
 ### 1.阶梯图形
 函数`stairs(x,y)`可以绘制阶梯图形
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA11.png)
-
+![](https://i.ibb.co/9m7TMq4F/AA11.png)
 
 ### 2.条形图形
 函数`bar(x,y)`可以绘制条形图形
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA12.png)
+![](https://i.ibb.co/MyK0d9kb/AA12.png)
 
 
 ### 3.填充图形
 `fill(x,y,’c’)`函数用来绘制并填充二维多边图形，x和y为二维多边形顶点坐标向量。字符 ’c’ 规定填充颜色，其取值前已叙述。
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA13.png)
+![](https://i.ibb.co/G4S15DGF/AA13.png)
 
 ---
 
@@ -549,7 +542,7 @@ fplot函数则可自适应地对函数进行采样，能更好地反应函数的
 
 **【例1】 绘制三维螺旋曲线**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA14.png)
+![](https://i.ibb.co/WvMgGD3F/AA14.png)
 
 
 ### 2.mesh函数
@@ -561,7 +554,7 @@ mesh函数用于绘制三维网格图。在不需要绘制特别精细的三维�
 
 **【例2】 绘制三维网格曲面图**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA15.png)
+![](https://i.ibb.co/JRw4yH8v/AA15.png)
 
 
 ### 3.surf函数
@@ -571,7 +564,7 @@ surf用于绘制三维曲面图，各线条之间的补面用颜色填充。surf
 
 **【例3】 绘制三维曲面图形**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA16.png)
+![](https://i.ibb.co/KjKC8Ptt/AA16.png)
 
 ### 4.视点
 视点位置可由方位角和仰角表示。方位角又称旋转角为视点位置在XY平面上的投影与X轴形成的角度，正值表示逆时针，负值表示顺时针。仰角又称视角为XY平面的上仰或下俯角，正值表示视点在XY平面上方，负值表示视点在XY平面下方。
@@ -581,14 +574,14 @@ surf用于绘制三维曲面图，各线条之间的补面用颜色填充。surf
 
 **【例4】 不同视角图形**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA17.png)
+![](https://i.ibb.co/qLyVvFy4/AA17.png)
 
 ### 5.等高线图
 等高线图可通过函数`contour3`绘制。
 
 **【例5】 多峰函数peaks的等高线图**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA18.png)
+![](https://i.ibb.co/8nZn7zBV/AA18.png)
 
 ### 6.动画设计
 `moviein`函数
@@ -599,10 +592,9 @@ surf用于绘制三维曲面图，各线条之间的补面用颜色填充。surf
 
 **【例6】播放一个直径不断变化的球体**
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA19.png)
+![](https://i.ibb.co/Xkb5wqHZ/AA19.png)
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA20.png)
-
+![](https://i.ibb.co/4w2JpQxm/AA20.png)
 
 ---
 # 第四部分：实战
@@ -653,7 +645,7 @@ fprintf('波动率: %.2f%%\n', std(returns) * 100);
 fprintf('最高: %.2f  最低: %.2f\n', max(price), min(price));
 ```
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA21.png)
+![](https://i.ibb.co/BVvJ3qfD/AA21.png)
 
 ---
 
@@ -700,7 +692,7 @@ title('鸢尾花分布（前两维特征）');
 legend('Location', 'best'); grid on;
 ```
 
-![](f:/personal/Desktop/Homework/level-0/lxy_work2/08_picture/AA22.png)
+![](https://i.ibb.co/GQ4bsCc7/AA22.png)
 
 ---
 
