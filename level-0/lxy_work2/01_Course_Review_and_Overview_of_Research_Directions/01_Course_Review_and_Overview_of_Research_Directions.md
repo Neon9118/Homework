@@ -36,10 +36,11 @@
       - [3.5.1 模型的指标](#351-模型的指标)
       - [3.5.2 消融实验（Ablation Study）](#352-消融实验ablation-study)
       - [3.5.3 结果可视化](#353-结果可视化)
-    - [3.6 文献阅读能力](#36-文献阅读能力)
-    - [3.7 写作能力](#37-写作能力)
+    - [3.6 文献阅读能力与写作能力](#36-文献阅读能力与写作能力)
     - [3.8 算法分析能力](#38-算法分析能力)
-  - [四、总结](#四总结)
+  - [四、综述阅读及感兴趣的研究方向](#四综述阅读及感兴趣的研究方向)
+    - [参考文献：](#参考文献)
+  - [五、总结](#五总结)
 
 
 ---
@@ -75,7 +76,7 @@ flowchart TD
     style I fill:#ff6b6b,color:#fff,stroke:#ff4444
     style K fill:#e8f4fd,stroke:#66b3ff
 ```
-*图1*
+*图1 科研闭环*
 
 
 ### 2.2 三类迭代
@@ -88,7 +89,7 @@ flowchart TD
     style B fill:#fff3e0,stroke:#ffb347
     style C fill:#ffe8e8,stroke:#ff6b6b
   ```
-  *图2*
+  *图2三类迭代*
 >三个圈从小到大，颜色从蓝到橙到红，表示循环越来越大、回退代价越来越高。
 
 ### 2.3 实验体系六要素
@@ -124,7 +125,8 @@ flowchart TD
     D -->|转化论文| E[📄 论文]
 ```
 </center>
-*图*
+
+*图3*
 
 ### 3.1 编程能力
 
@@ -157,6 +159,8 @@ flowchart TD
     style F fill:#fc5c65,color:#fff,stroke:#eb3b5a,stroke-width:2px
     style G fill:#a55eea,color:#fff,stroke:#8854d0,stroke-width:2px
 ```
+*图4*
+
 >紫色方框是主线
 >常见指标详见本文档[3.5 结果分析能力](#35-结果分析能力)
 >TABLE and FIGUE如何用代码制作详见本文档[第八部分：画图](#第八部分画图)
@@ -173,6 +177,8 @@ flowchart TD
 | [Numpy](https://numpy.org/) | 纯数学运算 | `np.dot(a, b)` |
 | [Scipy](https://scipy.org/) | 科学计算 | `scipy.optimize.minimize()` |
 | [Pytorch](https://pytorch.org/) | 深度学习 | `torch.nn.Linear(128, 64)` |
+
+*表格3.1.2*
 
 ```python
 import numpy as np
@@ -213,6 +219,7 @@ AI 里计算量大，数字的**存储精度**直接影响速度和显存，所�
 | **BF16** | 16 bit | ±3.4×10³⁸ | FP16的变种，范围大精度低 |
 | **BF32** | 32 bit | — | BF16的扩展版 |
 
+*表格3.1.3*
 > - **类比**：FP32 像用厘米量东西很精确，FP16 像用米量够用但粗糙，int8 像只记整数连小数都不要。
 > - **BF16 为啥存在？**  FP16 数值范围太小容易溢出（超过65504就炸），BF16 牺牲小数精度换取和 FP32 一样大的范围，训练更稳。现在 GPU 训练大模型基本都用 BF16。
 
@@ -257,7 +264,10 @@ CUDA 是 NVIDIA 的 GPU 编程接口，PyTorch 里一行 .cuda() 或 .to("cuda")
   ```
 
 </center>
-*复现难度依次递增*
+
+*图5*
+
+>复现难度从上到下，从易到难
 
 ### 3.3 数据处理能力
 
@@ -270,6 +280,8 @@ CUDA 是 NVIDIA 的 GPU 编程接口，PyTorch 里一行 .cuda() 或 .to("cuda")
 训练集|学习模型参数
 验证集|模型选择、超参数调整、早停
 测试集|最终评估泛化能力
+
+*表格3.3.1*
 
 >- 模型的参数:分为模型参数和超参数
 >>- 模型参数：模型自己学出来的,神经网络的权重偏置，训练过程中通过梯度下降自己调整，不用管。
@@ -294,6 +306,7 @@ CUDA 是 NVIDIA 的 GPU 编程接口，PyTorch 里一行 .cuda() 或 .to("cuda")
 数据增强泄露|增强后的样本与原始样本跨集分布|对训练图片做翻转增强后，增强图和原图分到不同集合|增强只在训练集内部做，增强前后保持同一集合
 特征选择泄露|选特征时用了全量数据的统计量|用全量数据的相关系数选top特征，再划分训练/测试|特征选择只在训练集上做
 
+*表格3.3.2*
 
 - **自检手册**
 
@@ -328,15 +341,64 @@ python 虚拟环境 git版本控制
 >用来表示数据：matplotlib以及更高级的画图工具
 
 
-### 3.6 文献阅读能力
+### 3.6 文献阅读能力与写作能力
 
 详见培训网站资料库中：c3s2 文献阅读入门
 
-### 3.7 写作能力
+入门新方向的推荐流程：
+```
+第1步：确定关键词
+  ├─ 问导师、师兄师姐
+  ├─ 用 ChatGPT/Claude 头脑风暴中英文关键词
+  └─ 查看相关 Wikipedia 词条的关键术语
+
+第2步：快速建立认知（1–2天）
+  ├─ 知网搜中文综述/学位论文（快速理解基本概念）
+  └─ Google Scholar / Semantic Scholar 搜英文 Survey
+
+第3步：定位核心论文群
+  ├─ 在 Google Scholar 找到 3–5 篇高引综述和经典论文
+  ├─ 用 Connected Papers / Research Rabbit 扩展关联论文
+  └─ 标记共享引用+重复出现的作者（= 领域核心人物）
+
+第4步：系统性检索
+  ├─ DBLP 查核心作者的论文列表
+  ├─ arXiv 按时间排序看最新工作
+  ├─ IEEE Xplore / ACM DL 高级检索补充
+  └─ Papers With Code 找 SOTA + 可复现代码
+
+第5步：建立持续跟踪
+  ├─ Google Scholar 创建关键词 Alert
+  ├─ arXiv 订阅相关子领域每日推送
+  ├─ Research Rabbit 建立项目订阅
+  └─ 关注核心作者的 Google Scholar / Twitter / GitHub
+  ```
 
 ### 3.8 算法分析能力
 
 
-## 四、总结
+---
 
-一篇论文的产出需要经历严谨的逻辑闭环以及反复的实验。做好科研至少需要掌握基础的八项能力
+## 四、综述阅读及感兴趣的研究方向
+
+
+
+
+
+
+### 参考文献：
+
+- **[1]** 王钦炀, 施水才, 王洪俊. 文本情感分析综述[J]. 软件导刊, 2025, 24(1): 193-202.
+
+- **[2]** MOUSAVI R, KITCHENS B, OLIVER A G, et al. From lexicons to large language models: a holistic evaluation of psychometric text analysis in social science research[J]. Information Systems Research, 2026. DOI:10.1287/isre.2024.1143.
+
+- **[3]** GRACIA J, FÄTH C, HARTUNG M, et al. Leveraging linguistic linked data for cross-lingual model transfer in the pharmaceutical domain[C]//The Semantic Web – ISWC 2020: 19th International Semantic Web Conference, Part II. Cham: Springer, 2020: 499-514.
+
+- **[4]** TIA M, LANUZO J S, BALTAZAR L R, et al. Sentiment simulation using generative AI agents[EB/OL]. (2025-05-28)[2026-08-02]. https://arxiv.org/abs/2505.22125.
+
+
+---
+
+## 五、总结
+
+一篇论文的产出需要经历严谨的逻辑闭环以及反复的实验。做好科研至少需要掌握基础的八项能力。
