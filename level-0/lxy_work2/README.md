@@ -4,6 +4,7 @@
 
 ## 目录结构
 
+```
 lxy_work2/
 ├── 01_Course_Review_and_Overview/ # 课程综述与概览
 ├── 02_principle_and_model/ # 机器学习原理与模型
@@ -12,7 +13,7 @@ lxy_work2/
 ├── 05_Linux_plus/ # Linux 基础与进阶
 ├── 06_AI_Models_and_Their_Classification/ # AI 模型与分类
 └── 07_matlab/ # MATLAB 入门实践
-
+```
 
 ## 说明
 
