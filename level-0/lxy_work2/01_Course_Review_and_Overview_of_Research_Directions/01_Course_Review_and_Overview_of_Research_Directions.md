@@ -39,8 +39,10 @@
     - [3.6 文献阅读能力与写作能力](#36-文献阅读能力与写作能力)
     - [3.8 算法分析能力](#38-算法分析能力)
   - [四、综述阅读及感兴趣的研究方向](#四综述阅读及感兴趣的研究方向)
-    - [参考文献：](#参考文献)
+    - [4.1 综述总结](#41-综述总结)
+    - [4.2 研究方向](#42-研究方向)
   - [五、总结](#五总结)
+    - [参考文献：](#参考文献)
 
 
 ---
@@ -381,10 +383,45 @@ python 虚拟环境 git版本控制
 
 ## 四、综述阅读及感兴趣的研究方向
 
+### 4.1 综述总结
+
+主要阅读了三篇综述
+
+这三篇论文的核心内容简述如下：
+
+1. 《文本情感分析综述》(中文)：系统梳理了情感分析的完整流程，包括预处理、特征提取及传统机器学习和深度学习分类技术，并探讨了该领域的局限性与未来方向。
+2. 《From Lexicons to Large Language Models...》(英文)：这是一份全面综述，追踪了情感分析方法从基于词典、传统机器学习、深度学习到当下大语言模型（LLMs）的整个演进历程。
+3. 《Sentiment Analysis and the LLOD Cloud》(英文)：探讨了如何利用链接数据（Linked Data） 和本体（如Marl、Onyx）来表示和整合情感信息，旨在解决不同情感资源和工具间的互操作性问题，以实现知识的复用与共享。
+
+### 4.2 研究方向
+
+- #### 方向一：面向社交网络的情感分析与复杂网络融合 
+
+>来源依据：
+>**①**中文综述《文本情感分析综述》系统梳理了情感分析的完整流程（预处理、特征提取、分类技术），明确将社交媒体文本作为核心应用场景；
+>**②**英文综述《From Lexicons to LLMs》则将social media列为重点研究领域之一，并指出"domain drift"（领域漂移）是持久挑战；LLOD专题综述专门讨论了社交网络中的情感和情绪分析，指出社交媒体流的特点是"strongly interconnected, temporal, noisy, short, and full of slang"。
+
+
+- #### 方向二：知识图谱/链接数据增强的情感分析
+
+>来源依据:
+>LLOD专题综述《Linked Data Models for Sentiment and Emotion Analysis in Social Networks》专门讨论了如何利用链接数据（Linked Data） 和本体（Marl、Onyx） 来表示和整合情感信息，目的是解决不同情感资源和工具间的互操作性问题，实现知识的复用与共享。Marl本体用于情感标注（支持极性和强度），Onyx本体用于情绪标注（支持Ekman"六大基本情绪"等模型），且均与W3C的PROV-O（溯源本体）对齐，可追踪语言资源的来源和质量。
 
 
 
+- #### 方向三：大规模文本情感分析的方法论基准研究
+>来源依据:
+>**①**《From Lexicons to Large Language Models》明确指出方法论基准研究的必要性：这篇综述不仅系统梳理了从词典到LLM的方法演进，还专门讨论了基准数据集（benchmark datasets），列举了IMDb、SST、SemEval系列等主流英文基准。更重要的是，它指出了“domain drift”（领域漂移）是一个持续存在的开放挑战，并强调了“评估框架”本身的重要性。
+>**②**《文本情感分析综述》（中文）提供了中文场景的切入点：这篇综述系统梳理了情感分析的完整流程（预处理、特征提取、分类技术），并明确指出了当前研究的局限性，包括对标注数据的依赖限制了泛化能力，以及跨语言情感分析是未来重要方向之一。
 
+
+---
+
+## 五、总结
+
+一篇论文的产出需要经历严谨的逻辑闭环以及反复的实验。做好科研至少需要掌握基础的八项能力。对于英文文献的阅读还较为吃力，单个单词还认识，放到复杂句式里，就没有办法很好地组织成有逻辑的语句，以后会更加注重英文文献的阅读
+
+---
 
 ### 参考文献：
 
@@ -394,11 +431,4 @@ python 虚拟环境 git版本控制
 
 - **[3]** GRACIA J, FÄTH C, HARTUNG M, et al. Leveraging linguistic linked data for cross-lingual model transfer in the pharmaceutical domain[C]//The Semantic Web – ISWC 2020: 19th International Semantic Web Conference, Part II. Cham: Springer, 2020: 499-514.
 
-- **[4]** TIA M, LANUZO J S, BALTAZAR L R, et al. Sentiment simulation using generative AI agents[EB/OL]. (2025-05-28)[2026-08-02]. https://arxiv.org/abs/2505.22125.
 
-
----
-
-## 五、总结
-
-一篇论文的产出需要经历严谨的逻辑闭环以及反复的实验。做好科研至少需要掌握基础的八项能力。
