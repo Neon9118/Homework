@@ -15,6 +15,7 @@ lxy_work2/
 └── 07_matlab/ # MATLAB 入门实践
 ```
 
+
 ## 说明
 
 本仓库为研究生入学前综合培训的阶段性作业归档，涵盖机器学习理论、编程工具链（Git/Linux）、AI 模型实践及 MATLAB 基础等内容。
@@ -26,9 +27,14 @@ lxy_work2/
 - 文档排版：LaTeX（ctexart + xelatex）
 - 编辑器：VS Code
 
-## 作者
+## 关于我
 
-**刘欣雨 (Neon)** · GitHub: [@Neon9118](https://github.com/Neon9118)
+- GitHub: [@Neon9118](https://github.com/Neon9118)
+- 邮箱: 1910863627@qq.com
+
+## 开源协议
+
+本项目采用 [MIT License](https://opensource.org/licenses/MIT)，你可以自由使用、修改和分发本仓库中的代码与文档，但需保留原始版权声明。
 
 ---
 
